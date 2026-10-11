@@ -1,11 +1,3 @@
-import { LOTS, BIBLIO, TYPES_CLIENT, ENTREPRISE } from "./data.js";
-import { db, save, reset, uid, client, prochainNumeroDevis, prochainRefChantier } from "./store.js";
-import {
-  fmtEur, fmtEur2, fmtK, fmtPct, fmtNum, fmtDate, fmtDateShort, fmtMonth, esc, round2,
-  TODAY, addDays, diffDays, toD, isWeekend, isFerie, nextWorkday,
-  TAUX_TVA, LOCAUX, REGIMES, tauxSuggere, tauxLigne, calculDevis, genererPlanning,
-  STATUT_DEVIS, STATUT_CHANTIER, badge, lotNom,
-} from "./utils.js";
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];

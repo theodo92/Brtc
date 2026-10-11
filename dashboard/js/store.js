@@ -1,6 +1,4 @@
 // Stockage local (navigateur). Remplaçable plus tard par une vraie base de données / API.
-import { CLIENTS, DEVIS, CHANTIERS, CA_SIGNE } from "./data.js";
-import { calculDevis } from "./utils.js";
 
 const KEY = "brtc-dashboard-v1";
 const clone = o => JSON.parse(JSON.stringify(o));
@@ -21,25 +19,25 @@ function load() {
   return seed();
 }
 
-export const db = load();
+const db = load();
 
-export function save() {
+function save() {
   try { localStorage.setItem(KEY, JSON.stringify(db)); } catch { /* ignoré */ }
 }
-export function reset() {
+function reset() {
   try { localStorage.removeItem(KEY); } catch { /* ignoré */ }
   location.hash = "#/";
   location.reload();
 }
 
-export const uid = p => p + Math.random().toString(36).slice(2, 8);
-export const client = id => db.clients.find(c => c.id === id);
-export function prochainNumeroDevis() {
+const uid = p => p + Math.random().toString(36).slice(2, 8);
+const client = id => db.clients.find(c => c.id === id);
+function prochainNumeroDevis() {
   const y = new Date().getFullYear();
   const max = db.devis.map(d => d.numero).filter(n => n.startsWith(`D-${y}-`)).map(n => +n.split("-")[2]).reduce((a, b) => Math.max(a, b), 0);
   return `D-${y}-${String(max + 1).padStart(3, "0")}`;
 }
-export function prochainRefChantier() {
+function prochainRefChantier() {
   const y = new Date().getFullYear();
   const max = db.chantiers.map(c => c.ref).filter(n => n.startsWith(`CH-${y}-`)).map(n => +n.split("-")[2]).reduce((a, b) => Math.max(a, b), 0);
   return `CH-${y}-${String(max + 1).padStart(3, "0")}`;

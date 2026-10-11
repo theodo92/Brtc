@@ -1,31 +1,30 @@
-import { LOTS } from "./data.js";
 
 // ---------- Formats ----------
 const eur = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
 const eur2 = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const num = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2 });
-export const fmtEur = v => eur.format(Math.round(v || 0));
-export const fmtEur2 = v => eur2.format(v || 0);
-export const fmtNum = v => num.format(v || 0);
-export const fmtK = v => {
+const fmtEur = v => eur.format(Math.round(v || 0));
+const fmtEur2 = v => eur2.format(v || 0);
+const fmtNum = v => num.format(v || 0);
+const fmtK = v => {
   const a = Math.abs(v);
   if (a >= 1e6) return (v / 1e6).toLocaleString("fr-FR", { maximumFractionDigits: 2 }) + " M€";
   if (a >= 1e3) return Math.round(v / 1e3).toLocaleString("fr-FR") + " k€";
   return fmtEur(v);
 };
-export const fmtPct = v => (v ?? 0).toLocaleString("fr-FR", { maximumFractionDigits: 1 }) + " %";
-export const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-export const round2 = v => Math.round((v + Number.EPSILON) * 100) / 100;
+const fmtPct = v => (v ?? 0).toLocaleString("fr-FR", { maximumFractionDigits: 1 }) + " %";
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const round2 = v => Math.round((v + Number.EPSILON) * 100) / 100;
 
 // ---------- Dates (chaînes AAAA-MM-JJ, calculs en UTC) ----------
-export const TODAY = new Date().toISOString().slice(0, 10);
-export const toD = s => new Date(s + "T00:00:00Z");
-export const toS = d => d.toISOString().slice(0, 10);
-export const addDays = (s, n) => { const d = toD(s); d.setUTCDate(d.getUTCDate() + n); return toS(d); };
-export const diffDays = (a, b) => Math.round((toD(b) - toD(a)) / 86400000);
-export const fmtDate = s => s ? toD(s).toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" }) : "—";
-export const fmtDateShort = s => toD(s).toLocaleDateString("fr-FR", { day: "2-digit", month: "short", timeZone: "UTC" });
-export const fmtMonth = ym => toD(ym + "-01").toLocaleDateString("fr-FR", { month: "short", timeZone: "UTC" }).replace(".", "");
+const TODAY = new Date().toISOString().slice(0, 10);
+const toD = s => new Date(s + "T00:00:00Z");
+const toS = d => d.toISOString().slice(0, 10);
+const addDays = (s, n) => { const d = toD(s); d.setUTCDate(d.getUTCDate() + n); return toS(d); };
+const diffDays = (a, b) => Math.round((toD(b) - toD(a)) / 86400000);
+const fmtDate = s => s ? toD(s).toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" }) : "—";
+const fmtDateShort = s => toD(s).toLocaleDateString("fr-FR", { day: "2-digit", month: "short", timeZone: "UTC" });
+const fmtMonth = ym => toD(ym + "-01").toLocaleDateString("fr-FR", { month: "short", timeZone: "UTC" }).replace(".", "");
 
 function easter(y) { // algorithme de Meeus/Jones/Butcher
   const a = y % 19, b = Math.floor(y / 100), c = y % 100, d = Math.floor(b / 4), e = b % 4,
@@ -35,7 +34,7 @@ function easter(y) { // algorithme de Meeus/Jones/Butcher
   return `${y}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 }
 const ferieCache = {};
-export function joursFeries(y) {
+function joursFeries(y) {
   if (ferieCache[y]) return ferieCache[y];
   const p = easter(y);
   const list = {
@@ -46,43 +45,43 @@ export function joursFeries(y) {
   };
   return (ferieCache[y] = list);
 }
-export const isFerie = s => joursFeries(+s.slice(0, 4))[s];
-export const isWeekend = s => { const w = toD(s).getUTCDay(); return w === 0 || w === 6; };
-export const isWorkday = s => !isWeekend(s) && !isFerie(s);
-export const nextWorkday = s => { while (!isWorkday(s)) s = addDays(s, 1); return s; };
+const isFerie = s => joursFeries(+s.slice(0, 4))[s];
+const isWeekend = s => { const w = toD(s).getUTCDay(); return w === 0 || w === 6; };
+const isWorkday = s => !isWeekend(s) && !isFerie(s);
+const nextWorkday = s => { while (!isWorkday(s)) s = addDays(s, 1); return s; };
 // Renvoie la date du n-ième jour ouvré en comptant `s` comme le jour 1.
-export function endAfterWorkdays(s, n) {
+function endAfterWorkdays(s, n) {
   s = nextWorkday(s);
   let left = n - 1;
   while (left > 0) { s = addDays(s, 1); if (isWorkday(s)) left--; }
   return s;
 }
-export function workdaysBetween(a, b) {
+function workdaysBetween(a, b) {
   let n = 0;
   for (let s = a; s <= b; s = addDays(s, 1)) if (isWorkday(s)) n++;
   return n;
 }
 
 // ---------- TVA ----------
-export const TAUX_TVA = [20, 10, 5.5, 0];
-export const LOCAUX = {
+const TAUX_TVA = [20, 10, 5.5, 0];
+const LOCAUX = {
   logement: "Logement achevé depuis plus de 2 ans",
   logement_neuf: "Logement de moins de 2 ans / construction",
   tertiaire: "Locaux professionnels / tertiaire",
 };
-export const REGIMES = {
+const REGIMES = {
   direct: "Client final (maître d'ouvrage)",
   autoliquidation: "Sous-traitance BTP — autoliquidation",
 };
 // Taux suggéré pour une ligne, selon le type de local et le régime du devis.
-export function tauxSuggere(devis, ligne) {
+function tauxSuggere(devis, ligne) {
   if (devis.regime === "autoliquidation") return 0;
   if (devis.local !== "logement") return 20;
   return ligne.energie ? 5.5 : 10;
 }
-export const tauxLigne = (devis, l) => (l.tva ?? tauxSuggere(devis, l));
+const tauxLigne = (devis, l) => (l.tva ?? tauxSuggere(devis, l));
 
-export function calculDevis(devis) {
+function calculDevis(devis) {
   const parLot = {};
   let brut = 0;
   for (const l of devis.lignes) {
@@ -109,7 +108,7 @@ export function calculDevis(devis) {
 
 // ---------- Planning automatique ----------
 // lotsMontants : { CODE_LOT: montant HT }. Renvoie les tâches planifiées + chemin critique.
-export function genererPlanning({ lotsMontants, debut, equipes = 1, aleas = 10, dureesForcees = {} }) {
+function genererPlanning({ lotsMontants, debut, equipes = 1, aleas = 10, dureesForcees = {} }) {
   const presents = LOTS.filter(l => (lotsMontants[l.code] || 0) > 0 || dureesForcees[l.code]);
   const codes = new Set(presents.map(l => l.code));
   // Prédécesseurs effectifs : si un lot prédécesseur est absent, on remonte à ses propres prédécesseurs.
@@ -151,18 +150,18 @@ export function genererPlanning({ lotsMontants, debut, equipes = 1, aleas = 10, 
   return { tasks, debut: start, fin: tasks.length ? jour[fin - 1] : start, joursOuvres: fin };
 }
 
-export const STATUT_DEVIS = {
+const STATUT_DEVIS = {
   brouillon: { label: "Brouillon", cls: "b-neutral" },
   envoye: { label: "Envoyé", cls: "b-info" },
   negociation: { label: "En négociation", cls: "b-warn" },
   accepte: { label: "Accepté", cls: "b-ok" },
   refuse: { label: "Refusé", cls: "b-crit" },
 };
-export const STATUT_CHANTIER = {
+const STATUT_CHANTIER = {
   preparation: { label: "Préparation", cls: "b-info" },
   en_cours: { label: "En cours", cls: "b-brand" },
   reception: { label: "Réception / réserves", cls: "b-warn" },
   livre: { label: "Livré", cls: "b-ok" },
 };
-export const badge = (map, k) => `<span class="badge ${map[k]?.cls || "b-neutral"}">${esc(map[k]?.label || k)}</span>`;
-export const lotNom = code => LOTS.find(l => l.code === code)?.nom || code;
+const badge = (map, k) => `<span class="badge ${map[k]?.cls || "b-neutral"}">${esc(map[k]?.label || k)}</span>`;
+const lotNom = code => LOTS.find(l => l.code === code)?.nom || code;

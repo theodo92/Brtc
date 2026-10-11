@@ -2,7 +2,7 @@
 // Les clients ci-dessous sont FICTIFS (exemples) ; les prix unitaires sont indicatifs
 // et doivent être remplacés par la bibliothèque de prix BRTC.
 
-export const ENTREPRISE = {
+const ENTREPRISE = {
   nom: "BRTC",
   activite: "Entreprise générale de rénovation — tous corps d'état",
   adresse: "4 rue de l'Écluse des Vertus, 93300 Aubervilliers",
@@ -17,7 +17,7 @@ export const ENTREPRISE = {
 // Lots tous corps d'état, dans l'ordre d'enchaînement chantier.
 // pred = lots qui doivent être terminés avant de démarrer.
 // prod = production moyenne d'une équipe en € HT / jour ouvré (sert au planning auto).
-export const LOTS = [
+const LOTS = [
   { code: "INST",   nom: "Installation de chantier",     pred: [],                     prod: 1500 },
   { code: "DEMO",   nom: "Démolition / curage",          pred: ["INST"],               prod: 1800 },
   { code: "GO",     nom: "Gros œuvre",                   pred: ["DEMO"],               prod: 2600 },
@@ -34,7 +34,7 @@ export const LOTS = [
 
 // Bibliothèque d'ouvrages (prix indicatifs Île-de-France, € HT).
 // energie: true => éligible au taux réduit 5,5 % (rénovation énergétique, logement > 2 ans).
-export const BIBLIO = [
+const BIBLIO = [
   { code: "INST-01", lot: "INST", designation: "Installation et repli de chantier (base vie, protections)", unite: "fft", pu: 2800 },
   { code: "INST-02", lot: "INST", designation: "Protection des parties communes", unite: "fft", pu: 950 },
   { code: "INST-03", lot: "INST", designation: "Benne et évacuation des gravats", unite: "u", pu: 620 },
@@ -74,9 +74,9 @@ export const BIBLIO = [
   { code: "NET-02", lot: "NET", designation: "Réception, levée des réserves, DOE", unite: "fft", pu: 650 },
 ];
 
-export const TYPES_CLIENT = ["Foncière", "Bailleur social", "Investisseur institutionnel", "Collectivité", "Agence d'architecture", "Gestion privée"];
+const TYPES_CLIENT = ["Foncière", "Bailleur social", "Investisseur institutionnel", "Collectivité", "Agence d'architecture", "Gestion privée"];
 
-export const CLIENTS = [
+const CLIENTS = [
   { id: "c1", nom: "Foncière Haussmann Patrimoine", type: "Foncière", contact: "M. Laurent", email: "contact@exemple-fonciere.fr", tel: "01 00 00 00 01", ville: "Paris 8e", depuis: 2014 },
   { id: "c2", nom: "Habitat Seine-Saint-Denis (exemple)", type: "Bailleur social", contact: "Mme Bernard", email: "travaux@exemple-bailleur.fr", tel: "01 00 00 00 02", ville: "Bobigny", depuis: 2009 },
   { id: "c3", nom: "Capital Pierre Gestion", type: "Investisseur institutionnel", contact: "M. Petit", email: "asset@exemple-invest.fr", tel: "01 00 00 00 03", ville: "Paris 16e", depuis: 2018 },
@@ -92,7 +92,7 @@ const L = (code, qte, extra = {}) => {
 };
 
 // Statuts devis : brouillon, envoye, negociation, accepte, refuse
-export const DEVIS = [
+const DEVIS = [
   { id: "d1", numero: "D-2026-041", clientId: "c1", objet: "Rénovation complète appartement 180 m²", adresse: "Avenue Kléber, Paris 16e", date: "2026-09-02", validite: 60, statut: "envoye", local: "logement", regime: "direct", remise: 0, retenue: true,
     lignes: [L("INST-01",1),L("INST-02",1),L("DEMO-01",180),L("GO-01",1),L("MAC-02",150),L("MENEXT-01",8,{}),L("ELEC-01",180),L("PLB-01",2),L("PLAT-01",90),L("PLAT-02",110),L("CAR-01",35),L("CAR-02",48),L("MENINT-01",9),L("MENINT-03",120),L("PEINT-01",520),L("NET-01",180),L("NET-02",1)] },
   { id: "d2", numero: "D-2026-042", clientId: "c3", objet: "Réhabilitation plateau de bureaux 420 m²", adresse: "Rue de Miromesnil, Paris 8e", date: "2026-09-10", validite: 30, statut: "negociation", local: "tertiaire", regime: "direct", remise: 3, retenue: true,
@@ -112,7 +112,7 @@ export const DEVIS = [
 ];
 
 // Chantiers. factureHT = cumul des situations déjà facturées.
-export const CHANTIERS = [
+const CHANTIERS = [
   { id: "k1", ref: "CH-2026-112", nom: "Appartement Poincaré", clientId: "c1", devisId: "d8", adresse: "Avenue Poincaré, Paris 16e", type: "Résidentiel", montantHT: 0, debut: "2026-09-07", fin: "2026-11-27", avancement: 55, factureHT: 38000, conducteur: "Conducteur A", statut: "en_cours" },
   { id: "k2", ref: "CH-2026-108", nom: "Parties communes Rivoli", clientId: "c6", devisId: "d5", adresse: "Rue de Rivoli, Paris 1er", type: "Résidentiel", montantHT: 0, debut: "2026-09-14", fin: "2026-10-30", avancement: 40, factureHT: 9000, conducteur: "Conducteur B", statut: "en_cours" },
   { id: "k3", ref: "CH-2026-097", nom: "Plateau bureaux Washington", clientId: "c3", adresse: "Rue Washington, Paris 8e", type: "Tertiaire", montantHT: 612000, debut: "2026-05-04", fin: "2026-10-23", avancement: 92, factureHT: 520000, conducteur: "Conducteur A", statut: "en_cours" },
@@ -123,7 +123,7 @@ export const CHANTIERS = [
 ];
 
 // CA signé (devis acceptés) par mois, € HT — historique de démonstration.
-export const CA_SIGNE = [
+const CA_SIGNE = [
   { mois: "2025-11", ht: 1210000 }, { mois: "2025-12", ht: 980000 }, { mois: "2026-01", ht: 1420000 },
   { mois: "2026-02", ht: 1150000 }, { mois: "2026-03", ht: 1680000 }, { mois: "2026-04", ht: 1390000 },
   { mois: "2026-05", ht: 1540000 }, { mois: "2026-06", ht: 1820000 }, { mois: "2026-07", ht: 1260000 },

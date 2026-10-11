@@ -3,12 +3,19 @@
 Outil de pilotage pour BRTC : clients, devis, chantiers, planning et TVA.
 Application web statique (HTML/CSS/JavaScript, sans installation ni dépendance).
 
-## Lancer en local
+## Ouvrir le tableau de bord
+
+**Le plus simple :** double-cliquer sur `index.html` (aucune installation, aucun serveur).
+
+Option serveur local (facultatif) :
 
 ```sh
 ./serve.sh            # puis ouvrir http://localhost:8080
 # ou : python3 -m http.server 8080 (depuis ce dossier)
 ```
+
+Le serveur doit rester lancé tant que la page est ouverte ; s'il est arrêté,
+`localhost:8080` affiche « connexion refusée ».
 
 ## Écrans
 
