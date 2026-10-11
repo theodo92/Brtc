@@ -26,7 +26,7 @@ function save() {
 }
 function reset() {
   try { localStorage.removeItem(KEY); } catch { /* ignoré */ }
-  location.hash = "#/";
+  try { history.replaceState(null, "", "#/"); } catch { /* ignoré */ }
   location.reload();
 }
 

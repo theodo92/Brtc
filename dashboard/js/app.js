@@ -407,7 +407,7 @@ function saveDraft(notify) {
   else { const i = db.devis.findIndex(x => x.id === d.id); db.devis[i] = d; }
   draft = JSON.parse(JSON.stringify(d));
   save();
-  if (notify) { toast(`Devis ${d.numero} enregistré`); location.hash = `#/devis/${d.id}`; }
+  if (notify) { toast(`Devis ${d.numero} enregistré`); go(`#/devis/${d.id}`); }
 }
 
 function renderLignes() {
@@ -466,7 +466,7 @@ function renderTotaux() {
     <button class="btn" id="genPlan">${icon("cal")} Prévisualiser le planning</button>
     ${plan ? `<a class="btn dark" href="#/planning/${plan.id}">${icon("site")} Voir le chantier ${esc(plan.ref)}</a>` : `<button class="btn dark" id="toChantier">${icon("check")} Devis signé → créer le chantier</button>`}
   </div>`;
-  $("#genPlan").onclick = () => { saveDraft(false); location.hash = `#/planning?devis=${draft.id}`; };
+  $("#genPlan").onclick = () => { saveDraft(false); go(`#/planning?devis=${draft.id}`); };
   $("#toChantier") && ($("#toChantier").onclick = () => convertirEnChantier());
 }
 
@@ -487,7 +487,7 @@ function convertirEnChantier() {
   if (m) m.ht += t.ht;
   save();
   toast(`Chantier ${k.ref} créé et planifié`);
-  location.hash = `#/planning/${k.id}`;
+  go(`#/planning/${k.id}`);
 }
 
 views.apercu = id => {
@@ -604,8 +604,8 @@ views.planning = (id, params) => {
   <div class="card mt"><div class="card-h"><h2>Détail des lots</h2></div><div class="card-b table-wrap" id="pTable"></div></div>`;
 };
 views.planning.bind = id => {
-  $("#pickK").onchange = e => location.hash = e.target.value ? `#/planning/${e.target.value}` : "#/planning";
-  $("#pickD").onchange = e => location.hash = e.target.value ? `#/planning?devis=${e.target.value}` : "#/planning";
+  $("#pickK").onchange = e => go(e.target.value ? `#/planning/${e.target.value}` : "#/planning");
+  $("#pickD").onchange = e => go(e.target.value ? `#/planning?devis=${e.target.value}` : "#/planning");
   if (!planState) return;
   const draw = () => {
     const cfg = { debut: $("#pDebut").value || TODAY, equipes: +$("#pEq").value || 1, aleas: +$("#pAl").value || 0 };
@@ -713,8 +713,22 @@ views.tva.bind = () => {
 };
 
 // ---------- Routeur ----------
+// La route courante est gardée en mémoire : la navigation marche aussi quand
+// la page est affichée dans un cadre qui ne transmet pas l'adresse (#…).
+let courant = location.hash || "#/";
+function go(h) {
+  courant = h;
+  try { history.pushState(null, "", h); } catch { /* cadre restreint : navigation en mémoire */ }
+  route();
+}
+document.addEventListener("click", e => {
+  const a = e.target.closest?.('a[href^="#"]');
+  if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey) return;
+  e.preventDefault();
+  go(a.getAttribute("href"));
+});
 function route() {
-  const [path, qs] = location.hash.slice(1).split("?");
+  const [path, qs] = courant.slice(1).split("?");
   const params = new URLSearchParams(qs || "");
   const seg = (path || "/").split("/").filter(Boolean);
   let v, arg;
@@ -728,7 +742,7 @@ function route() {
 
   main.innerHTML = views[v](arg, params);
   views[v].bind?.(arg, params);
-  $$("tr[data-href]", main).forEach(tr => tr.onclick = e => { if (!e.target.closest("a,button,input,select")) location.hash = tr.dataset.href; });
+  $$("tr[data-href]", main).forEach(tr => tr.onclick = e => { if (!e.target.closest("a,button,input,select")) go(tr.dataset.href); });
   const navKey = { client: "clients", devisEdit: "devis", apercu: "devis" }[v] || v;
   $$(".nav a").forEach(a => a.classList.toggle("active", a.dataset.v === navKey || (navKey === "devisEdit" && arg === "nouveau" && a.dataset.v === "nouveau")));
   if (v === "devisEdit" && arg === "nouveau") { $$(".nav a").forEach(a => a.classList.toggle("active", a.dataset.v === "nouveau")); }
@@ -757,5 +771,5 @@ $("#theme").onclick = () => {
   r.dataset.theme = dark ? "light" : "dark";
   try { localStorage.setItem("brtc-theme", r.dataset.theme); } catch { /* ignoré */ }
 };
-window.addEventListener("hashchange", route);
+window.addEventListener("popstate", () => { courant = location.hash || "#/"; route(); });
 route();

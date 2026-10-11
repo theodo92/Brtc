@@ -97,7 +97,7 @@ h3 { font-size: 14px; font-weight: 600; }
   display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px;
   text-decoration: none; color: #D7D5D0; font-weight: 500;
 }
-.nav a:hover { background: var(--brtc-anthracite-2); color: #fff; }
+@media (hover: hover) { .nav a:hover { background: var(--brtc-anthracite-2); color: #fff; } }
 .nav a.active { background: var(--brtc-orange); color: #1F2329; font-weight: 650; }
 .nav svg { width: 18px; height: 18px; flex: none; }
 .nav .count { margin-left: auto; font-size: 11px; background: rgba(255,255,255,.12); padding: 1px 7px; border-radius: 10px; }
@@ -169,6 +169,7 @@ table.t { width: 100%; border-collapse: collapse; }
 .table-wrap { overflow-x: auto; }
 
 .field { display: flex; flex-direction: column; gap: 5px; }
+.field > input, .field > select, .field > textarea { width: 100%; }
 .field label { font-size: 12px; color: var(--text-2); font-weight: 500; }
 input, select, textarea {
   font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border);
@@ -272,8 +273,10 @@ input[type=number] { text-align: right; }
 
 @media (max-width: 1100px) {
   .g-4 { grid-template-columns: repeat(2, minmax(0,1fr)); }
-  .g-21, .g-12, .g-3 { grid-template-columns: 1fr; }
+  .g-21, .g-12, .g-3, .g-2 { grid-template-columns: 1fr; }
   .form-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .layout { grid-template-columns: 200px 1fr; }
+  .sticky { position: static; }
 }
 @media (max-width: 760px) {
   .layout { grid-template-columns: 1fr; }
