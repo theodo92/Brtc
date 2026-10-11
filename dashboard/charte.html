@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Charte graphique BRTC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+  <script>try { const t = localStorage.getItem("brtc-theme"); if (t) document.documentElement.dataset.theme = t; } catch {}</script>
+  <style>
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 24px 80px; }
+    .hero { background: var(--brtc-anthracite); color: #fff; border-radius: 14px; padding: 40px; position: relative; overflow: hidden; }
+    .hero::after { content: ""; position: absolute; right: -60px; top: 0; bottom: 0; width: 260px; background: var(--brtc-orange); transform: skewX(-14deg); }
+    .hero h1 { font-size: 40px; font-weight: 800; letter-spacing: .02em; position: relative; z-index: 1; }
+    .hero p { color: #C9C7C2; max-width: 560px; position: relative; z-index: 1; }
+    section { margin-top: 36px; }
+    section > h2 { font-size: 20px; margin-bottom: 4px; }
+    section > .lead { color: var(--text-2); margin: 0 0 16px; }
+    .sw { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); background: var(--surface); }
+    .sw .c { height: 96px; display: flex; align-items: flex-end; padding: 10px; font-weight: 700; font-size: 12px; }
+    .sw .m { padding: 10px 12px; font-size: 12px; }
+    .sw .m code { font-size: 12px; font-weight: 700; }
+    .type-row { display: grid; grid-template-columns: 160px 1fr; gap: 16px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .type-row .spec { font-size: 12px; color: var(--text-2); }
+    .logo-box { height: 150px; border-radius: var(--radius); display: grid; place-items: center; border: 1px solid var(--border); }
+    .logo-word { font-size: 44px; font-weight: 800; letter-spacing: .1em; }
+    .logo-word span { display: inline-block; width: 14px; height: 14px; background: var(--brtc-orange); margin-left: 6px; transform: skewX(-14deg); }
+    .do { border-left: 4px solid var(--ok); } .dont { border-left: 4px solid var(--crit); }
+    ul.rules { margin: 0; padding-left: 18px; line-height: 1.8; }
+    .back { display: inline-flex; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <a class="btn back" href="index.html">← Retour au tableau de bord</a>
+  <div class="hero">
+    <div class="small" style="color:var(--brtc-orange);font-weight:700;letter-spacing:.1em;position:relative;z-index:1">CHARTE GRAPHIQUE · V1</div>
+    <h1>BRTC</h1>
+    <p>Entreprise générale de rénovation tous corps d'état depuis 1991. Une identité sobre et solide : l'anthracite du chantier, l'orange de la signalétique, des chiffres lisibles.</p>
+  </div>
+
+  <section>
+    <h2>1. Principes</h2>
+    <p class="lead">Trois mots issus des valeurs BRTC, traduits en règles visuelles.</p>
+    <div class="grid g-3">
+      <div class="card card-b"><h3>Service</h3><p class="muted small">L'information utile d'abord : alertes et actions à faire en haut de chaque écran. Un écran = une question métier.</p></div>
+      <div class="card card-b"><h3>Qualité</h3><p class="muted small">Chiffres alignés à droite, en chiffres tabulaires, toujours avec l'unité (€ HT / TTC, jours ouvrés, %).</p></div>
+      <div class="card card-b"><h3>Exigence</h3><p class="muted small">Peu de couleurs. L'orange est réservé aux actions et à la marque ; les statuts ont leurs propres couleurs, toujours avec un libellé.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. Logo</h2>
+    <p class="lead">Mot-symbole BRTC en capitales grasses espacées. Zone de protection : la hauteur d'une lettre tout autour.</p>
+    <div class="grid g-3">
+      <div class="logo-box" style="background:#fff"><div class="logo-word" style="color:#1F2329">BRTC<span></span></div></div>
+      <div class="logo-box" style="background:#1F2329"><div class="logo-word" style="color:#fff">BRTC<span></span></div></div>
+      <div class="logo-box" style="background:#FBAD1C"><div class="logo-word" style="color:#1F2329">BRTC</div></div>
+    </div>
+    <div class="grid g-2 mt">
+      <div class="card card-b do"><h3>À faire</h3><ul class="rules small muted"><li>Anthracite sur fond clair, blanc sur fond anthracite</li><li>Anthracite sur fond orange (jamais blanc sur orange : contraste insuffisant)</li><li>Utiliser le fichier logo officiel pour les documents imprimés</li></ul></div>
+      <div class="card card-b dont"><h3>À éviter</h3><ul class="rules small muted"><li>Déformer, incliner ou ajouter une ombre au logo</li><li>Placer le logo sur une photo chargée sans aplat</li><li>Changer la couleur du logo hors des 3 versions ci-dessus</li></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. Couleurs</h2>
+    <p class="lead">Une couleur de marque, un neutre fort, des statuts réservés.</p>
+    <h3 style="margin-bottom:10px">Marque</h3>
+    <div class="grid g-4">
+      <div class="sw"><div class="c" style="background:#FBAD1C;color:#1F2329">Orange BRTC</div><div class="m"><code>#FBAD1C</code><br><span class="muted">Boutons principaux, accents, logo. Texte anthracite dessus.</span></div></div>
+      <div class="sw"><div class="c" style="background:#E09900;color:#1F2329">Orange foncé</div><div class="m"><code>#E09900</code><br><span class="muted">Survol des boutons, graphiques.</span></div></div>
+      <div class="sw"><div class="c" style="background:#9A5B00;color:#fff">Orange texte</div><div class="m"><code>#9A5B00</code><br><span class="muted">Orange lisible pour du texte sur fond clair (contraste AA).</span></div></div>
+      <div class="sw"><div class="c" style="background:#1F2329;color:#fff">Anthracite</div><div class="m"><code>#1F2329</code><br><span class="muted">Titres, barre de navigation, chemin critique.</span></div></div>
+    </div>
+    <h3 style="margin:18px 0 10px">Neutres</h3>
+    <div class="grid g-4">
+      <div class="sw"><div class="c" style="background:#F4F3F0;color:#1F2329">Béton clair</div><div class="m"><code>#F4F3F0</code><br><span class="muted">Fond des écrans.</span></div></div>
+      <div class="sw"><div class="c" style="background:#FFFFFF;color:#1F2329;border-bottom:1px solid #E4E1DB">Blanc</div><div class="m"><code>#FFFFFF</code><br><span class="muted">Cartes, documents.</span></div></div>
+      <div class="sw"><div class="c" style="background:#E4E1DB;color:#1F2329">Joint</div><div class="m"><code>#E4E1DB</code><br><span class="muted">Bordures, séparateurs.</span></div></div>
+      <div class="sw"><div class="c" style="background:#565B63;color:#fff">Gris texte</div><div class="m"><code>#565B63</code><br><span class="muted">Textes secondaires.</span></div></div>
+    </div>
+    <h3 style="margin:18px 0 10px">Statuts (réservés — toujours avec un libellé)</h3>
+    <div class="grid g-4">
+      <div class="sw"><div class="c" style="background:#1E8E5A;color:#fff">Validé / OK</div><div class="m"><code>#1E8E5A</code> <span class="badge b-ok">Accepté</span></div></div>
+      <div class="sw"><div class="c" style="background:#B86E00;color:#fff">Attention</div><div class="m"><code>#B86E00</code> <span class="badge b-warn">À relancer</span></div></div>
+      <div class="sw"><div class="c" style="background:#C9372C;color:#fff">Urgent / retard</div><div class="m"><code>#C9372C</code> <span class="badge b-crit">Retard</span></div></div>
+      <div class="sw"><div class="c" style="background:#2A6FB8;color:#fff">Information</div><div class="m"><code>#2A6FB8</code> <span class="badge b-info">Envoyé</span></div></div>
+    </div>
+    <p class="note mt">Proportions conseillées : 70 % neutres (béton clair, blanc), 20 % anthracite, 10 % orange. Un écran qui devient « tout orange » perd sa hiérarchie.</p>
+  </section>
+
+  <section>
+    <h2>4. Typographie</h2>
+    <p class="lead">Inter (Google Fonts, libre de droits) pour toute l'interface et les documents. Chiffres tabulaires activés pour aligner les montants.</p>
+    <div class="card card-b">
+      <div class="type-row"><div class="spec">Titre d'écran<br>24 px · 700</div><div style="font-size:24px;font-weight:700">Tableau de bord</div></div>
+      <div class="type-row"><div class="spec">Chiffre clé<br>26 px · 700</div><div style="font-size:26px;font-weight:700;letter-spacing:-.02em">1,24 M€</div></div>
+      <div class="type-row"><div class="spec">Titre de carte<br>16 px · 650</div><div style="font-size:16px;font-weight:650">Chantiers en cours</div></div>
+      <div class="type-row"><div class="spec">Texte courant<br>14 px · 400</div><div>Rénovation complète d'un appartement de 180 m², avenue Kléber.</div></div>
+      <div class="type-row"><div class="spec">Libellé / légende<br>12 px · 500</div><div class="small muted">Devis envoyé il y a 18 jours sans réponse</div></div>
+      <div class="type-row" style="border:0"><div class="spec">En-tête de tableau<br>11 px · 600 · capitales</div><div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text-3)">Montant HT</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>5. Composants</h2>
+    <p class="lead">Les briques réutilisées dans tout le tableau de bord.</p>
+    <div class="grid g-2">
+      <div class="card card-b"><h3 style="margin-bottom:12px">Boutons</h3><div class="actions">
+        <button class="btn primary">Action principale</button><button class="btn dark">Action forte</button><button class="btn">Secondaire</button><button class="btn ghost">Discret</button></div>
+        <p class="small muted">Un seul bouton orange par zone : c'est l'action que l'on attend de l'utilisateur.</p></div>
+      <div class="card card-b"><h3 style="margin-bottom:12px">Statuts des devis</h3><div class="actions">
+        <span class="badge b-neutral">Brouillon</span><span class="badge b-info">Envoyé</span><span class="badge b-warn">En négociation</span><span class="badge b-ok">Accepté</span><span class="badge b-crit">Refusé</span></div>
+        <h3 style="margin:14px 0 12px">Statuts des chantiers</h3><div class="actions">
+        <span class="badge b-info">Préparation</span><span class="badge b-brand">En cours</span><span class="badge b-warn">Réception / réserves</span><span class="badge b-ok">Livré</span></div></div>
+      <div class="card kpi accent"><div class="label">Carnet de commandes</div><div class="value">1,87 M€</div><div class="delta">Indicateur clé : filet orange en haut, libellé, valeur, contexte.</div></div>
+      <div class="card card-b"><h3 style="margin-bottom:12px">Avancement vs délai</h3>
+        <div class="progress"><span style="width:48%"></span><i style="left:62%"></i></div>
+        <p class="small muted">Barre orange = avancement réel. Trait anthracite = temps écoulé. Si le trait dépasse nettement la barre : retard.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>6. Images & ton</h2>
+    <div class="grid g-2">
+      <div class="card card-b"><h3>Photographie</h3><ul class="rules small muted">
+        <li>Uniquement des photos de réalisations BRTC (avant / après, détails de finition, atelier, locaux).</li>
+        <li><b>Aucune personne visible</b> sur les visuels (règle de l'entreprise).</li>
+        <li>Lumière naturelle, cadrages droits, pas de filtres.</li></ul></div>
+      <div class="card card-b"><h3>Ton rédactionnel</h3><ul class="rules small muted">
+        <li>Professionnel, factuel, direct : « Relancer le client », pas « Il serait peut-être bon de… ».</li>
+        <li>Vocabulaire du métier : lots, corps d'état, situation de travaux, réception, réserves, DOE.</li>
+        <li>Toujours préciser HT ou TTC.</li></ul></div>
+    </div>
+  </section>
+</div>
+</body>
+</html>
