@@ -1,0 +1,4 @@
+video/photos/
+__pycache__/
+*.pyc
+preview_*.jpg
