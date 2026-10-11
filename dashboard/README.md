@@ -7,6 +7,12 @@ Application web statique (HTML/CSS/JavaScript, sans installation ni dépendance)
 
 **Le plus simple :** double-cliquer sur `index.html` (aucune installation, aucun serveur).
 
+**En localhost (http://localhost:8080) :** double-cliquer sur
+`Lancer BRTC (Windows).bat` ou `Lancer BRTC (Mac).command`. Le navigateur s'ouvre
+tout seul ; garder la fenêtre du serveur ouverte pendant l'utilisation.
+Python est nécessaire pour le mode localhost ; sans Python, le lanceur ouvre
+directement `index.html`.
+
 Option serveur local (facultatif) :
 
 ```sh

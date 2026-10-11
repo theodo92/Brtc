@@ -387,10 +387,10 @@ views.devisEdit.bind = () => {
   $("#addLibre").onclick = () => { d.lignes.push({ lot: $("#addLot").value, designation: "Ouvrage à décrire", unite: "u", qte: 1, pu: 0 }); renderLignes(); };
   $$("[data-tpl]").forEach(b => b.onclick = () => {
     const k = b.dataset.tpl;
-    let m2 = 1;
-    if (k !== "sdb") { m2 = +prompt("Surface concernée (m²) ?", "100"); if (!m2) return; }
-    TEMPLATES[k](m2).forEach(([c, q]) => d.lignes.push(ligneDe(c, q)));
-    renderLignes(); toast("Modèle ajouté — ajustez les quantités");
+    const ajouter = m2 => { TEMPLATES[k](m2).forEach(([c, q]) => d.lignes.push(ligneDe(c, q))); renderLignes(); toast("Modèle ajouté — ajustez les quantités"); };
+    if (k === "sdb") return ajouter(1);
+    modal("Surface concernée", `<div class="field"><label for="m2">Surface (m²)</label><input id="m2" name="m2" type="number" min="1" step="any" value="100" required></div>`,
+      fd => { ajouter(+fd.get("m2")); }, "Ajouter le modèle");
   });
   $$("[data-h]").forEach(el => el.addEventListener(el.type === "checkbox" ? "change" : "input", () => {
     const f = el.dataset.h;
@@ -496,7 +496,7 @@ views.apercu = id => {
   const c = client(d.clientId), t = calculDevis(d);
   const lots = LOTS.filter(l => d.lignes.some(x => x.lot === l.code));
   return `<div class="topbar no-print"><div><div class="small muted"><a href="#/devis/${d.id}">Devis ${esc(d.numero)}</a> /</div><h1>Aperçu</h1></div>
-    <div class="actions"><a class="btn" href="#/devis/${d.id}">Modifier</a><button class="btn primary" onclick="window.print()">${icon("print")} Imprimer / PDF</button></div></div>
+    <div class="actions"><a class="btn" href="#/devis/${d.id}">Modifier</a><button class="btn primary print-btn" onclick="window.print()">${icon("print")} Imprimer / PDF</button></div></div>
   <div class="note brand no-print" style="max-width:860px;margin:0 auto 16px">Mise en page provisoire — elle sera alignée sur votre trame de devis dès que vous me la transmettez.</div>
   <div class="doc">
     <div class="head"><div class="logo">BRTC<small>${esc(ENTREPRISE.activite)}</small><small>${esc(ENTREPRISE.adresse)} · ${esc(ENTREPRISE.site)}</small></div>
@@ -591,7 +591,7 @@ views.planning = (id, params) => {
   }
   planState = src;
   return `<div class="topbar no-print"><div><div class="small muted"><a href="#/planning">Planning</a> /</div><h1>${esc(src.titre)}</h1><div class="sub">${esc(src.sous)}</div></div>
-    <div class="actions">${src.chantier ? `<button class="btn" id="savePlan">${icon("check")} Appliquer au chantier</button>` : ""}<button class="btn primary" onclick="window.print()">${icon("print")} Imprimer</button></div></div>
+    <div class="actions">${src.chantier ? `<button class="btn" id="savePlan">${icon("check")} Appliquer au chantier</button>` : ""}<button class="btn primary print-btn" onclick="window.print()">${icon("print")} Imprimer</button></div></div>
   <div class="toolbar no-print">${selecteur}</div>
   <div class="card no-print"><div class="card-b form-grid">
     <div class="field"><label>Date de démarrage</label><input type="date" id="pDebut" value="${src.cfg.debut}"></div>
@@ -750,7 +750,7 @@ $("#nav").innerHTML = `
   <a href="#/planning" data-v="planning">${icon("cal")} Planning automatique</a>
   <a href="#/tva" data-v="tva">${icon("calc")} Calculateur TVA</a>
   <a href="charte.html">${icon("palette")} Charte graphique</a>`;
-$("#reset").onclick = () => { if (confirm("Remettre les données de démonstration ? Vos modifications locales seront perdues.")) reset(); };
+$("#reset").onclick = () => modal("Réinitialiser la démo", '<p class="muted">Remettre les données de démonstration ? Vos modifications enregistrées dans ce navigateur seront perdues.</p>', () => reset(), "Réinitialiser");
 $("#theme").onclick = () => {
   const r = document.documentElement;
   const dark = r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
