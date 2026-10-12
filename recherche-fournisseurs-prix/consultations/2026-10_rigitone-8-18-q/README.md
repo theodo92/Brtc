@@ -63,6 +63,10 @@ annonce non datée, vendeur non identifiable, profil typique d'une fausse boutiq
 
 ## 4. Prochaines étapes
 
+> **Fournisseurs à Paris (stock et prix) :** voir [`fournisseurs-paris.md`](fournisseurs-paris.md),
+> avec la liste d'appels par ordre de priorité. Point d'alerte : la version bords droits
+> serait en fin de série, à confirmer auprès des agences.
+
 1. **Préciser le besoin** : surface (m²), adresse du chantier, date de livraison souhaitée,
    besoin ou non de l'ossature et de l'enduit dans la même commande.
 2. **Envoyer la demande de prix** ([`demande-de-prix.md`](demande-de-prix.md)) à :

@@ -13,14 +13,15 @@ recherche-fournisseurs-prix/
     └── AAAA-MM_produit/       ← une consultation = un dossier
         ├── README.md          ← besoin, comparatif, analyse, prochaines étapes
         ├── comparatif.csv     ← tableau de prix (s'ouvre dans Excel)
-        └── demande-de-prix.md ← modèle de demande à envoyer aux fournisseurs
+        ├── demande-de-prix.md ← modèle de demande à envoyer aux fournisseurs
+        └── fournisseurs-paris.md ← fournisseurs locaux à appeler (stock, prix)
 ```
 
 ## Consultations
 
 | Date | Produit | Statut | Dossier |
 |---|---|---|---|
-| Oct. 2026 | Plaque Rigitone Activ'Air 8/18 Q, bords droits, joints sans bande | Prix publics relevés, demandes de prix à envoyer | [`2026-10_rigitone-8-18-q`](consultations/2026-10_rigitone-8-18-q/README.md) |
+| Oct. 2026 | Plaque Rigitone Activ'Air 8/18 Q, bords droits, joints sans bande | Prix publics relevés, fournisseurs Paris identifiés, appels à passer | [`2026-10_rigitone-8-18-q`](consultations/2026-10_rigitone-8-18-q/README.md) |
 
 ## Méthode
 
