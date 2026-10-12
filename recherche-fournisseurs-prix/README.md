@@ -36,6 +36,19 @@ recherche-fournisseurs-prix/
    comprise, délai, disponibilité, minimum de commande.
 5. **Noter le résultat** dans `comparatif.csv` et mettre à jour `fournisseurs.csv`.
 
+## Décomposer un prix vendu BRTC (fourni-posé)
+
+Les prix de vente BRTC comprennent la fourniture **et** la pose. Pour les comparer
+aux prix fournisseurs :
+
+1. Prix vendu × **0,7** → coût sans marge.
+2. Coût sans marge × **0,3** → **prix de pose**, arrondi à la cinquantaine (ou centaine)
+   d'euros **inférieure** sur un total chantier.
+3. Coût sans marge − pose (non arrondie) → **budget fourniture**, à comparer aux devis des négoces.
+
+Exemple : 140 € HT/m² × 23 m² = 3 220 € → 2 254 € sans marge → pose 676 € (650 € arrondi),
+fourniture ≈ 1 578 €.
+
 ## Règles de lecture des prix
 
 - Tous les montants sont ramenés en **€ HT** (TVA 20 % retirée quand le site affiche du TTC).

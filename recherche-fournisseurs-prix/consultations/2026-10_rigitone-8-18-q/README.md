@@ -61,6 +61,27 @@ annonce non datée, vendeur non identifiable, profil typique d'une fausse boutiq
 - Laine minérale en plénum si l'on vise la performance αw 0,80.
 - Chutes : prévoir **8 à 12 %** selon la géométrie de la pièce et le calepinage, à ajuster au plan.
 
+## 3 bis. Prix de vente BRTC et décomposition
+
+Vente précédente : **140 € HT/m² fourni-posé**, pour **23 m²**.
+Calcul selon la règle BRTC (voir le README principal).
+
+| Étape | Calcul | Total chantier | Au m² |
+|---|---|---|---|
+| Prix vendu fourni-posé | 140 × 23 | 3 220 € HT | 140,00 € |
+| Sans marge | × 0,7 | 2 254 € | 98,00 € |
+| **Pose** | × 0,3 | 676,20 € → **650 €** (arrondi à la cinquantaine inférieure) | 29,40 € |
+| **Fourniture** (reste du coût sans marge) | 2 254 − 676,20 | ≈ **1 578 €** | ≈ **68,60 €** |
+
+**Comparaison avec les prix fournisseurs :**
+- 23 m² + 10 % de chutes ≈ 25,3 m², soit **11 plaques** (moins d'une palette de 20).
+- Plaques au prix pro SFIC (85,83 à 90,69 € HT la plaque) : **944 à 998 € HT**,
+  soit environ 41 à 43 € HT par m² posé.
+- Il reste donc **580 à 630 €** (≈ 25 € HT/m²) dans le budget fourniture pour l'ossature
+  Rigi 60, l'enduit Vario, la visserie, la laine minérale éventuelle et la livraison.
+  Ce montant paraît suffisant, mais il est à confirmer avec les devis
+  (les frais de livraison pour 11 plaques peuvent peser).
+
 ## 4. Prochaines étapes
 
 > **Fournisseurs à Paris (stock et prix) :** voir [`fournisseurs-paris.md`](fournisseurs-paris.md),
